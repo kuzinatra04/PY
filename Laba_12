@@ -1,0 +1,30 @@
+import requests
+import json
+
+
+def send_request(method, url, headers=None, data=None):
+    response = requests.request(method, url, headers=headers, data=data)
+    print(f'=== {method} {url} ===')
+    print('Response code:', response.status_code)
+    print('Response headers:', response.headers)
+    print('Response body:', response.text)
+    print()
+
+
+def main():
+    url = 'https://httpbin.org'
+
+    # OPTION
+    send_request('OPTION', url)
+
+    # GET
+    send_request('GET', url)
+
+    # POST
+    headers = {'Content-Type': 'application/json'}
+    data = json.dumps({'key': 'value'})
+    send_request('POST', url, headers=headers, data=data)
+
+
+if __name__ == '__main__':
+    main()
